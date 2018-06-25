@@ -1,3 +1,0 @@
-"start.p"  "end.p"  "type"         "nexons"  "start"   "end"     "chromosome"  "id"                       "BF"  "reads.expected"  "reads.observed"  "reads.ratio"  overlap1_freq  overlap1  overlap1_w/_id  overlap2_freq  overlap2  overlap2_w/_id  
-719171     719180   "duplication"  10        51261552  51262786  "19"          "chr19:51261552-51262786"  32.6  1748              2513              1.44           2              1.0       118             1              [1.0]     ['COL0335']     
-719171     719180   "duplication"  10        51261552  51262786  "19"          "chr19:51261552-51262786"  32.6  1748              2513              1.44           2              1.0       119             1              [1.0]     ['COL0335']     
