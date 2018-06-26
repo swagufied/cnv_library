@@ -10,7 +10,11 @@ class TableObject:
 		#read in file if filename is given
 		if 'filename' in kwargs:
 			self.delim = kwargs['delim']
-			self.data = FileHandler.read_file(kwargs['filename'], delim=kwargs['delim'])
+
+			if 'secondary_delim' in kwargs:
+				self.data = FileHandler.read_file(kwargs['filename'], delim=kwargs['delim'], secondary_delim=kwargs['secondary_delim'])
+			else:
+				self.data = FileHandler.read_file(kwargs['filename'], delim=kwargs['delim'])
 		else:
 			self.data = kwargs['data']
 
@@ -64,6 +68,12 @@ class TableObject:
 	"""
 	DATA FUNCTIONS
 	"""
+	def add_id(self, colname):
+
+		self.set_data(DataManip.add_id(self.data, colname))
+		self.set_colkeys({'id': colname})
+
+
 	# sorts column(s) by ascending or descending order. default = ascending
 	def sort_row(self, by_var, ascending=True, descending=False, view_only = False, **kwargs):
 		if not ascending:

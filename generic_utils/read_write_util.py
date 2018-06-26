@@ -40,8 +40,12 @@ def read_file(filename, delim, **kwargs):
 	# if 'multidelim' in kwargs and kwargs['multidelim']:
 	for row in contents:
 		split_row = row.strip().split(delim)
-		# clean_row = [col for col in split_row if col != '']
-		clean_row = [col for col in split_row]
+
+		clean_row = []
+		if 'secondary_delim' in kwargs:
+			clean_row = [col.strip().split(kwargs[secondary_delim]) for col in split_row]
+		else:
+			clean_row = [col.strip().split() for col in split_row]
 		new_contents.append(clean_row)
 	# else:
 	# 	new_contents = [row.strip().split(delim) for row in contents]
@@ -74,7 +78,7 @@ def read_file_asDict(filename, delim, **kwargs):
 	return new_contents
 
 # writes contents to file with delim specified
-def write_file(filename, contents, delim):
+def write_file(filename, contents, delim, **kwargs):
 
 	file = open(filename, 'w+')
 
@@ -84,7 +88,11 @@ def write_file(filename, contents, delim):
 	else:
 
 		for row in contents:
-			# print(delim.join(row))
+			
+			if 'secondary_delim' in kwargs:
+				for col in row:
+					col = kwargs['secondary_delim'].join(col)
+
 			file.write(str(delim.join(row)) + "\n")
 		print('{} lines written to {}'.format(len(contents), filename))
 	file.close()

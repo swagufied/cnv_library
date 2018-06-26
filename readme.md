@@ -1,8 +1,8 @@
 IN PROGRESS
 
-# DATA ORGANIZATION
+### DATA ORGANIZATION
 
-	* GenericObject
+	# GenericObject
 		* used to group multiple data objects together (organization purposes)
 
 		* initialization
@@ -18,11 +18,11 @@ IN PROGRESS
 			* print_data(dataname, **kwargs) - will print the dataset. if a library object, will access print_data function. kwargs specified will be applied
 
 
-	* TableObject
+	# TableObject
 
 		* initialization
 			* data - initialize the stored dataset through either of following
-				* filename, delim
+				* filename, delim, secondary_delim
 				* list of list dataset
 
 		- Column functions
@@ -34,6 +34,8 @@ IN PROGRESS
 			* del_col(colname) - deletes colname
 
 		* Data functions
+			* add_id(colname) - will add a numeric id column. replaces id column if id column already exists
+				* colname - string. name of new id column
 			* sort_row(by_var, ascending = True, descending = False, view_only = False)
 				* by_var - list of indices OR column names which you want to sort by
 				* ascending - sorts vars in ascending order
@@ -68,7 +70,7 @@ IN PROGRESS
 				* format - aligns all columns for easy viewing (may not be practical for datasets with too many columns)
 
 
-	* GenomicObject
+	# GenomicObject
 
 		* initialization
 			* data - same as TableObject
@@ -78,7 +80,7 @@ IN PROGRESS
 				* Ex. colnames - {"id": "ID", "chr": "chromosome", "start": "STRT", "end": "E"}
 	
 
-	* CNVObject
+	# CNVObject
 
 		* initialization
 			* data - same as TableObject
@@ -98,7 +100,7 @@ IN PROGRESS
 					* values must be dict. can update values for CNV types. refer to "type_values" parameter in initialization for specifics
 
 
-# ANALYSIS FUNCTIONS
+### ANALYSIS FUNCTIONS
 	
 	* find_interval_overlaps(ref_obj, compare_objects, **kwargs) - used to find overlaps between genomic data based on base pair overlaps
 		* returns a GenomicObject (or CNVObject depending on the overlap analysis done)
@@ -113,9 +115,13 @@ IN PROGRESS
 			* relative_to_first - default = False. if True, will use overlap percentage in reference to length of segment in ref_obj. If False, the reference will be the length of the segment in the compare_object
 			* overlap_colname - must be list that matches number and order of compare objects. default is "overlap@" where @ is an integer
 
+	* annotate(base_obj, annotation_obj) - annotates gene intervals. 
+		* base_obj - must be GenomicObject or CNVObject. this is the dataset that will be annotated
+		* annotation_obj - (list of) GenomicObject of CNVObject. these are the datasets that will be used to annotate. There must be a "gene_id" column specified through set_colkeys() function.
 
 
-# FILE READ/WRITE
+
+### FILE READ/WRITE
 
 	* change_delim(filename, pre_delim, post_delim, **kwargs)
 		* filename - filepath for file
@@ -126,8 +132,10 @@ IN PROGRESS
 	* read_file(filename, delim)
 		* filename - filepath for file
 		* delim - string. delimiter of file
+		* secondary_delim - string. delimiter within a column value
 
 	* write_file(filename, contents, delim)
 		* filename - filepath for file
 		* contents - list of list OR string
 		* delim - string. delimiter of file
+		* secondary_delim - string. delimiter within a column value

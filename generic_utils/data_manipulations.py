@@ -4,6 +4,18 @@
 
 from operator import itemgetter
 
+def add_id(table, colname):
+
+	data = [colname].extend(table[0])
+
+	for i in range(1, len(table)):
+		row = [i].extend(table[i])
+		data.append(row)
+
+
+	return data
+
+
 def sort_row(table, index, descending=False):
 
 	def typify(x, index):

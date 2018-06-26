@@ -16,13 +16,25 @@ xhmm_filter_result_file = "/home/kbaeg/Documents/outputs/run2/FILTERED.cnv"
 xhmm_denovo_result_file = "/home/kbaeg/Documents/outputs/run2/RUN2.denovo.format.cnv"
 
 
+ss = read_file("/home/kbaeg/Documents/scripts/R/i_var/exomeDepth_13_pe.csv", ",")
+
+output = []
+for row in ss:
+	chr = row[6].replace('"',"")
+
+	output.append([chr, row[4], row[5]])
+
+write_file("ss.txt", output, "\t")
+
+sys.exit()
+
 # table = [
 # ['col1', 'col2', 'col3'],
 # ['cat', 'healthy', 'bob'],
 # ['cat', 'healthy', 'mark'],
 # ['cat', 'sick', 'joe']
 # ]
-# get_freq(table, [1,2])
+# get_freq(table, [1,'col3'])
 # sys.exit()
 
 # denovo = read_file(xhmm_denovo_result_file, "\t")

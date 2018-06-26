@@ -11,7 +11,9 @@ import sys
 def find_interval_overlaps(ref_obj, compare_objects, **kwargs):
 
 	# kwargs: add_stats, overlap_colname, relative_to_first
-	def _find_overlaps(GenomicObject1, GenomicObject2, ReturnGenomicObject, match_CNV=False, add_stats=False, relative_to_first=False, threshold = 0, **kwargs):
+	def _find_overlaps(GenomicObject1, GenomicObject2, ReturnGenomicObject, match_CNV=False, exclude_nonmatches = True,
+		add_stats=False, relative_to_first=False, threshold = 0, **kwargs):
+
 		genomic_object1_data = GenomicObject1.get_data()
 		genomic_object2_data = GenomicObject2.get_data()
 
@@ -82,15 +84,36 @@ def find_interval_overlaps(ref_obj, compare_objects, **kwargs):
 					overlap_list.append(overlap)
 					id_list.append(row2[genomic_object2_id_index])
 
-			if len(overlap_list) >= 1:
-				if add_stats:
-					row1.append(str(len(overlap_list)))
-					row1.append(overlap_list)
-					row1.append(id_list)
-					data.append(row1)
+			if exclude_nonmatches:
+				if len(overlap_list) >= 1:
+					if add_stats:
+						row1.append(str(len(overlap_list)))
+						row1.append(overlap_list)
+						row1.append(id_list)
+						data.append(row1)
 
+					else:
+						data.append(row1)
+			else:
+				if len(overlap_list) >= 1:
+					if add_stats:
+						row1.append(str(len(overlap_list)))
+						row1.append(overlap_list)
+						row1.append(id_list)
+						data.append(row1)
+
+					else:
+						data.append(row1)
 				else:
-					data.append(row1)
+					if add_stats:
+						row1.append(str(0))
+						row1.append([])
+						row1.append([])
+						data.append(row1)
+
+					else:
+						data.append(row1)
+
 
 		ReturnGenomicObject.set_data(data)
 		ReturnGenomicObject.set_colkeys(GenomicObject1.get_colkeys())
