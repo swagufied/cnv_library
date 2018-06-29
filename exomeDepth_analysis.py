@@ -19,6 +19,10 @@ xhmm_denovo_result_file = "/home/kbaeg/Documents/outputs/run2/RUN2.denovo.format
 
 s = TableObject(filename="/home/kbaeg/Documents/outputs/exomeDepth/exomeDepth_13_pe_ucscGenome_output.csv", delim = "\t")
 # print(s.get_data())
+s.add_id('id')
+print(s.print_data())
+
+
 p = s.get_freq(["hg19.kgXref.geneSymbol", "hg19.knownGene.chrom"], print_freq = False)
 for i, v in p.items():
 	print(i[1])

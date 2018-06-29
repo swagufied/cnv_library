@@ -32,6 +32,8 @@ IN PROGRESS
 				* Ex. TableObject.set_colkeys({"id":"ID#", "chr": "chromosome"})
 			* get_colkeys() - returns dict of all dataset columns that have been matched to a mandatory column type
 			* del_col(colname) - deletes colname
+			* _get_colindex(colname) - returns column index of column
+				* colname - string
 
 		* Data functions
 			* add_id(colname) - will add a numeric id column. replaces id column if id column already exists
