@@ -52,8 +52,10 @@ IN PROGRESS
 
 		* Statistics functions
 			* get_num_rows() - returns number of rows in dataset
-			* get_freq(columns)
-				* columns - must be list or column names or column indices. will return AAA
+			* get_freq(columns) - returns frequencies.
+				* columns - must be list of column names or column indices. frequencies will branch in order of columns provided
+				* print_freq - default = True, if True, will print the freq results. if False, will return a dict of dicts
+
 
 		* Data handling
 			* set_data(data)
@@ -115,10 +117,19 @@ IN PROGRESS
 			* relative_to_first - default = False. if True, will use overlap percentage in reference to length of segment in ref_obj. If False, the reference will be the length of the segment in the compare_object
 			* overlap_colname - must be list that matches number and order of compare objects. default is "overlap@" where @ is an integer
 
+	* prep_intervals_for_UCSCgenome_annotation(GenomicData, save_results = True, filename = "ucsc_interval_prep_data.txt") - prepares your data for pasting into custom intervals in "http://genome.ucsc.edu/cgi-bin/hgTables"
+		* GenomicData - a GenomicObject or CNVObject
+		* save_results - if True (default), will save results to filename. The default file is "ucsc_interval_prep_data.txt". If False, will return a string or list of list you can print.
+		* return_list - if save_results is True, return_list = True will return the results as a list. if False, will return as string.
+
+	"""
+	needs testing
+	"""
 	* annotate(base_obj, annotation_obj) - annotates gene intervals. 
 		* base_obj - must be GenomicObject or CNVObject. this is the dataset that will be annotated
 		* annotation_obj - (list of) GenomicObject of CNVObject. these are the datasets that will be used to annotate. There must be a "gene_id" column specified through set_colkeys() function.
 
+	
 
 
 ### FILE READ/WRITE

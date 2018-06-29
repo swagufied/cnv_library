@@ -4,88 +4,29 @@ from Objects.GenomicObject import *
 from Objects.CNVObject import *
 from analysis_utils.find_overlaps import find_interval_overlaps
 from generic_utils.statistics_handlers import *
+from analysis_utils.ucsc_genome_prep import prep_intervals_for_UCSCgenome_annotation
 
 import sys
 
 
 
 
-exomedepth_result_file = "/home/kbaeg/Documents/scripts/R/exomeDepth_calls.csv"
+exomedepth_result_file = "/home/kbaeg/Documents/scripts/R/i_var/exomeDepth_13_pe.csv"
 xhmm_result_file = "/home/kbaeg/Documents/outputs/run2/RUN2.cnv"
 xhmm_filter_result_file = "/home/kbaeg/Documents/outputs/run2/FILTERED.cnv"
 xhmm_denovo_result_file = "/home/kbaeg/Documents/outputs/run2/RUN2.denovo.format.cnv"
 
 
-ss = read_file("/home/kbaeg/Documents/scripts/R/i_var/exomeDepth_13_pe.csv", ",")
-
-output = []
-for row in ss:
-	chr = row[6].replace('"',"")
-
-	output.append([chr, row[4], row[5]])
-
-write_file("ss.txt", output, "\t")
+s = TableObject(filename="/home/kbaeg/Documents/outputs/exomeDepth/exomeDepth_13_pe_ucscGenome_output.csv", delim = "\t")
+# print(s.get_data())
+p = s.get_freq(["hg19.kgXref.geneSymbol", "hg19.knownGene.chrom"], print_freq = False)
+for i, v in p.items():
+	print(i[1])
+	print('index: ', i, 'value: ', v)
 
 sys.exit()
 
-# table = [
-# ['col1', 'col2', 'col3'],
-# ['cat', 'healthy', 'bob'],
-# ['cat', 'healthy', 'mark'],
-# ['cat', 'sick', 'joe']
-# ]
-# get_freq(table, [1,'col3'])
-# sys.exit()
 
-# denovo = read_file(xhmm_denovo_result_file, "\t")
-# denovo[0].append("ID")
-# denovo[0].append("CHR")
-# denovo[0].append("START")
-# denovo[0].append("END")
-
-# idcount = 1
-# for i in range(1, len(denovo)):
-# # for i in range(1, 10):
-# 	row = denovo[i]
-# 	row.append(str(idcount))
-# 	idcount += 1
-
-# 	splitrow = row[2].split(':')
-# 	row.append(splitrow[0])
-
-# 	splitrow2 = splitrow[1].split('..')
-# 	row.append(splitrow2[0])
-# 	row.append(splitrow2[1])
-
-# 	cnvleft = row[3].split('<')
-# 	cnvright = cnvleft[1].split('>')
-# 	row[3] = cnvright[0]
-
-# 	print(row)
-
-# write_file("/home/kbaeg/Documents/outputs/run2/RUN2.denovo.format.cnv", denovo, "\t")
-
-
-
-# sys.exit()
-
-
-exomeDepth = GenericObject()
-tofind_overlaps = []
-
-# for i in range(2,12):
-# 	filename = "/home/kbaeg/Documents/scripts/R/i_var/exomeDepth_{}_pe.csv".format(i)
-# 	exomeDepth_result = CNVObject(filename = filename, delim=",", 
-# 		colnames = {'id': '"id"', 'chr':'"chromosome"', 'start':'"start"', 'end':'"end"', 'type':'"type"'})
-# 	exomeDepth.set_data('results_{}'.format(i), exomeDepth_result)
-# 	if i != 2:
-# 		tofind_overlaps.append(getattr(exomeDepth, 'results_{}'.format(i)))
-
-# tofind_overlaps = [exomeDepth.results_8]
-# total_overlap = find_interval_overlaps(exomeDepth.results_10, tofind_overlaps, threshold = 0, add_stats = True, match_CNV = True)
-# print(total_overlap.print_data())
-
-# sys.exit()
 
 #create exomeCopyDepth object
 exomeDepth = GenericObject()
@@ -105,6 +46,13 @@ xhmm_denovo_data = CNVObject(filename = xhmm_denovo_result_file, delim = "\t",
 xhmm.set_data('raw_results', xhmm_raw_data)
 xhmm.set_data('filtered_results', xhmm_filter_data)
 xhmm.set_data('denovo', xhmm_denovo_data)
+
+p = exomeDepth.raw_results.get_freq(['"type"'], print_freq = False)
+
+for i, v in p.items():
+    print('index: ', i, 'value: ', v)
+
+sys.exit()
 
 
 tofind_overlaps = [xhmm.denovo, xhmm.filtered_results]

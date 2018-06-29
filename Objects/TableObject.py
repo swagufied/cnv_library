@@ -2,6 +2,7 @@ import generic_utils.read_write_util as FileHandler
 import generic_utils.column_manipulations as ColManip
 import generic_utils.data_manipulations as DataManip
 import re
+import pandas as pd
 
 
 class TableObject:
@@ -18,6 +19,7 @@ class TableObject:
 		else:
 			self.data = kwargs['data']
 
+		# print(self.data[0])
 		self.col = {}
 
 		if 'colnames' in kwargs:
@@ -124,24 +126,50 @@ class TableObject:
 	"""
 	def get_num_rows(self):
 		return len(self.data) - 1
-	def get_freq(self, columns):
+	def get_freq(self, columns, print_freq=True):
 
-		indices = []
+		colnames = []
 
 		for column in columns:
-			if isinstance(column, str):
-				try:
-					indices.apend(int(column))
-				except:
-					indicies.append(self._get_colindex(column))
+			if isinstance(column, str) and column in self.data[0]:
+				colnames.append(column)
 
 			elif isinstance(column, int):
-				indices.append(column)
+				colnames.append(self.data[0][column])
 			else:
 				raise Exception("You must provide only column names or column indices as strings or integers respectively when specifying columns for a function.")
 
+		df = pd.DataFrame(self.data[1:], columns = self.data[0])
+		freq = df.groupby(columns, as_index = False).size()
 
-		return
+		if print_freq:
+			print('-----------------------------------------------')
+			print("\"get_freq\" RESULTS")
+			print('-----------------------------------------------')
+			print("columns = {}".format(', '.join(columns)))
+			print(' ')
+			print(freq)
+			print('-----------------------------------------------')
+		else:
+
+			freq_dict = {}
+
+			for i, v in freq.items():
+
+				temp_key = freq_dict
+
+				for key in i:
+					if key != i[len(i) - 1]:
+
+						temp_key[key] = {}
+
+						temp_key = temp_key[key]
+					else:
+						temp_key[key] = v
+
+				# print(temp_key)
+
+			return freq_dict
 
 	"""
 	DATA HANDLERS

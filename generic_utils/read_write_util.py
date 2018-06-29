@@ -44,9 +44,9 @@ def read_file(filename, delim, **kwargs):
 		clean_row = []
 		if 'secondary_delim' in kwargs:
 			clean_row = [col.strip().split(kwargs[secondary_delim]) for col in split_row]
+			new_contents.append(clean_row)
 		else:
-			clean_row = [col.strip().split() for col in split_row]
-		new_contents.append(clean_row)
+			new_contents.append(split_row)
 	# else:
 	# 	new_contents = [row.strip().split(delim) for row in contents]
 
@@ -84,7 +84,7 @@ def write_file(filename, contents, delim, **kwargs):
 
 	if isinstance(contents, str):
 		file.write(str(contents))
-		print('{} lines written to {}'.format(contents.count('\n'), filename))
+		print('{} lines written to {}'.format(contents.count('\n') - 1, filename))
 	else:
 
 		for row in contents:
@@ -94,7 +94,7 @@ def write_file(filename, contents, delim, **kwargs):
 					col = kwargs['secondary_delim'].join(col)
 
 			file.write(str(delim.join(row)) + "\n")
-		print('{} lines written to {}'.format(len(contents), filename))
+		print('{} lines written to {}'.format(len(contents) - 1, filename))
 	file.close()
 
 	print('-----------------------------------------------')
