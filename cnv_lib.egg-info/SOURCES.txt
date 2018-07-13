@@ -1,0 +1,6 @@
+cnv_lib/__init__.py
+cnv_lib.egg-info/PKG-INFO
+cnv_lib.egg-info/SOURCES.txt
+cnv_lib.egg-info/dependency_links.txt
+cnv_lib.egg-info/not-zip-safe
+cnv_lib.egg-info/top_level.txt

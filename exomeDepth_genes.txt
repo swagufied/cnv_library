@@ -1,0 +1,82 @@
+hg19.kgXref.geneSymbol
+GBP3	possible links to CVID, https://patents.google.com/patent/US7226791 - synthesized polypeptide homology similar to GBP-3
+AMY2A	x
+AMY1A	x
+GSTM1	x
+LOC100288142 (NBPF20)
+NBPF9	x
+NBPF8	x
+PDE4DIP	one of most frequently associated with immunodeficiency. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3277634/ - genes annotated as associated with immunodeficiency are not very good predictors of CVID genes. but compiling genes from immunodeficient studies are better predictor of CVID genes
+HRNR	x
+FCGR2C	Expression of FcγRIIc is dependent on SNPs in exon3 and intron7 of the FCGR2C gene, which in most individuals is a non-expressed pseudogene https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4301001/. FcyRs affect the humoral immune response and especially the production of antibodies of the immunoglobulin G (IgG) isotype result in a heightened susceptibility to infections
+TRNA_Asp	x
+HSPA7	x
+UGT2B17	x
+NAIP	x
+C4B_2	associated with immunodeficiency,  gene localizes to the major histocompatibility complex (MHC) class III region on chromosome 6.(genecard), MHC associated with CVID https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1905305/
+TCP10	x
+CBRC7TM_40	x, no description
+OR2A7	x
+ARHGEF34P	x
+CTAGE4	x
+ARHGEF5	x
+DEFB106A	x
+SPATA31D4	x
+AK097447	x
+ORM1	The specific function of this protein has not yet been determined; however, it may be involved in aspects of immunosuppression (need to find articles)
+MRC1	need source. among its related pathways are Innate Immune System 
+MIR511-2	plays role in immune response of macrophages. Also miR-511 and miR-147b have been associated with modulation of Toll-like receptor 4 (TLR)-mediated signaling and NF-κB activation. https://www.physiology.org/doi/full/10.1152/physiolgenomics.00140.2013
+PARG	x
+AGAP8	x
+LOC728407	x (cant find genecard for this)
+ASAH2	x
+AB231710	Anti-AASS antibody (https://www.abcam.com/aass-antibody-ab231710.html)
+AB231711	Anti-valyl tRNA synthetase antibody (https://www.abcam.com/valyl-trna-synthetase-antibody-ab231711.html)
+DDX12P	x
+SNORA75	x
+BX647938	x, no description
+OR4K2
+OR4K1
+AHNAK2	x
+abParts	x
+Z49973	x, no description
+SLX1A	x
+SLX1B-SULT1A4	x
+LGALS9C	x
+USP32P2
+FAM106A
+CCDC144B
+LGALS9B
+CCL4L2
+AX747639
+DQ580766
+TBC1D3C
+TBC1D3G
+DQ571776
+DQ571391
+DQ574805
+DQ593188
+DQ586142
+DQ575686
+DQ580080
+DQ579850
+D63785
+TBC1D3
+LOC440434
+ARL17A
+LRRC37A
+ARL17
+DQ597730
+PSG4
+LILRB3
+LILRA6
+KIR3DL3
+KIR2DL3
+KIR2DL1
+KIR2DS4
+GQ422373
+KIR3DL1
+KIR2DL4
+LOC100287534
+RFPL4AL1
+ZNF417

@@ -24,6 +24,7 @@ IN PROGRESS
 			* data - initialize the stored dataset through either of following
 				* filename, delim, secondary_delim
 				* list of list dataset
+				* headers - list. can set column names for datasets that dont have it. headers are necessary!!
 
 		- Column functions
 			* set_colname(oldcolname, newcolname) - will renames the oldcolname to newcolname
@@ -57,6 +58,9 @@ IN PROGRESS
 			* get_freq(columns) - returns frequencies.
 				* columns - must be list of column names or column indices. frequencies will branch in order of columns provided
 				* print_freq - default = True, if True, will print the freq results. if False, will return a dict of dicts
+			* get_col_values(columns) - returns all unique values of column combination inputted
+				* columns - list of all column indices or column names of interest
+				* print_values - default is True. if false, will return list of lists of unique row combination values
 
 
 		* Data handling
@@ -82,6 +86,7 @@ IN PROGRESS
 			* colnames - must specify following mandatory column names
 				* id, chr, start, end
 				* Ex. colnames - {"id": "ID", "chr": "chromosome", "start": "STRT", "end": "E"}
+			* name - sets the name that will print while program runs
 	
 
 	# CNVObject
@@ -97,6 +102,7 @@ IN PROGRESS
 					* del - ['del', 'loss', 'deletion']
 					* unk - ['unk']
 				* type_values - must be dict. Keys will specify type of CNV (if dup, del, or unk make sure the key matches). This is how custom CNV types can be added. Values must be in list. These will be the dataset values that correspond with the CNV type
+				
 
 			* CNV functions
 				* get_cnvType_values - returns dict of all CNV types and values specified
@@ -140,7 +146,7 @@ IN PROGRESS
 		* filename - filepath for file
 		* pre_delim - delimiter in the current file
 		* post_delim - delimiter desired in new file
-		* ourfile - default is filename provided. if outfile provided, new file will be created instead of overwriting the current one
+		* outfile - default is filename provided. if outfile provided, new file will be created instead of overwriting the current one
 
 	* read_file(filename, delim)
 		* filename - filepath for file
