@@ -38,6 +38,7 @@ def find_interval_overlaps(ref_obj, compare_objects, **kwargs):
 		#initialize new data
 		data = [genomic_object1_data[0]]
 
+
 		#determine all indexes necessary
 		genomic_object1_chr_index   = GenomicObject1._get_colindex(GenomicObject1.col["chr"])
 		genomic_object1_start_index = GenomicObject1._get_colindex(GenomicObject1.col["start"])
@@ -117,6 +118,7 @@ def find_interval_overlaps(ref_obj, compare_objects, **kwargs):
 
 		ReturnGenomicObject.set_data(data)
 		ReturnGenomicObject.set_colkeys(GenomicObject1.get_colkeys())
+
 		return ReturnGenomicObject
 
 	# checks if two cnv intervals overlap and returns the greatest percentage of overlap in refernece to either interval

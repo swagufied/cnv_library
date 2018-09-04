@@ -3,7 +3,7 @@ import cnv_lib.generic_utils.column_manipulations as ColManip
 import cnv_lib.generic_utils.data_manipulations as DataManip
 import re
 import pandas as pd
-
+from copy import deepcopy
 
 class TableObject:
 
@@ -238,8 +238,10 @@ class TableObject:
 		if 'end' in kwargs:
 			end = kwargs['end']
 
-		return_data = [self.data[0]]
-		return_data.extend(self.data[start:end])
+		data = deepcopy(self.data)
+
+		return_data = [data[0]]
+		return_data.extend(data[start:end])
 
 		return return_data
 
@@ -299,6 +301,10 @@ class TableObject:
 	# returns string of datatable that is formatted for neat columns
 	def _format_data(self, data, **kwargs):
 
+		overflow = 3
+		if 'overflow' in kwargs:
+			overflow = int(kwargs['overflow'])
+
 		start = 1
 		if 'start' in kwargs:
 			start = int(kwargs['start'])
@@ -318,11 +324,34 @@ class TableObject:
 		for row in data[0:format_end]:
 			for i in range(0, len(row)):
 
-				if len(str(row[i])) > col_widths.get(i):
+				# take care of long lists in columns
+				if isinstance(row[i], list):
+					if len(row[i]) > overflow:
+						new_content = []
+						for j in range(0, overflow):
+							new_content.append(row[i][j])
+						new_content.append('+{} more...'.format(str(len(row[i]) - overflow)))
+
+						if len(str(new_content)) > col_widths.get(i):
+							col_widths[i] = len(str(new_content))
+
+				elif len(str(row[i])) > col_widths.get(i):
 					col_widths[i] = len(str(row[i]))
 		
 		formatted_string = "".join(str(data[0][i]).ljust(col_widths[i] + 2) for i in range(0, len(data[0]))) + "\n"
 		for row in data[start:end+1]:
+
+			for i in range(0, len(row)):
+
+				# take care of long lists in columns
+				if isinstance(row[i], list):
+					if len(row[i]) > overflow:
+						new_content = []
+						for j in range(0, overflow):
+							new_content.append(row[i][j])
+						new_content.append('+{} more...'.format(str(len(row[i]) - overflow)))
+						row[i] = new_content
+
 			formatted_string += "".join(str(row[i])[0:col_widths[i]].ljust(col_widths[i] + 2) for i in range(0, len(row))) + "\n"
 
 		return formatted_string[:-1]

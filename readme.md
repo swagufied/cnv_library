@@ -25,6 +25,7 @@ IN PROGRESS
 				* filename, delim, secondary_delim
 				* list of list dataset
 				* headers - list. can set column names for datasets that dont have it. headers are necessary!!
+				* name - sets the name that will print while program runs
 
 		- Column functions
 			* set_colname(oldcolname, newcolname) - will renames the oldcolname to newcolname
@@ -76,6 +77,7 @@ IN PROGRESS
 			* print_data(format = True, **kwargs)
 				* prints data to terminal
 				* format - aligns all columns for easy viewing (may not be practical for datasets with too many columns)
+				* overflow - default = 3, shortens long lists in columns to overflow limit. makes for summarized viewing.
 
 
 	# GenomicObject
@@ -86,8 +88,7 @@ IN PROGRESS
 			* colnames - must specify following mandatory column names
 				* id, chr, start, end
 				* Ex. colnames - {"id": "ID", "chr": "chromosome", "start": "STRT", "end": "E"}
-			* name - sets the name that will print while program runs
-	
+
 
 	# CNVObject
 
