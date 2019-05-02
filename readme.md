@@ -1,4 +1,5 @@
 IN PROGRESS
+* a tool to aid in the analysis of CNVs. 
 
 ### DATA ORGANIZATION
 
