@@ -1,5 +1,5 @@
 # CNV Library
-This project started as an attempt to construct a simple library for CNV (copy number variable) analysis specific to the needs of a project analysizing data output from XHMM, ExomeCopy, and ExomeDepth. The focus was on making this library able to accomodate the different conventions of notating CNV data as well as providing a single step method to matching genomic intervals with additional conditions, something not accomplished by existing libraries without multiple steps.
+This project started as an attempt to construct a simple library for CNV (copy number variable) analysis specific to the needs of a project analysizing data output from XHMM, ExomeCopy, and ExomeDepth. The focus was on making this library able to accomodate the different conventions of notating CNV data as well as providing a single-step method to match CNV intervals, something not accomplished by existing libraries without multiple steps. 
 
 ## Requirements:
 * Python3
