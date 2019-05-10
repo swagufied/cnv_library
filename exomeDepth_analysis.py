@@ -11,30 +11,29 @@ import sys
 
 
 
-exomedepth_result_file = "/home/kbaeg/Documents/scripts/R/i_var/exomeDepth_13_pe.csv"
-xhmm_result_file = "/home/kbaeg/Documents/outputs/run2/RUN2.cnv"
-xhmm_filter_result_file = "/home/kbaeg/Documents/outputs/run2/FILTERED.cnv"
-xhmm_denovo_result_file = "/home/kbaeg/Documents/outputs/run2/RUN2.denovo.format.cnv"
+exomedepth_result_file = "/exomeDepth_13_pe.csv"
+xhmm_result_file = "/RUN2.cnv"
+xhmm_filter_result_file = "/FILTERED.cnv"
+xhmm_denovo_result_file = "/RUN2.denovo.format.cnv"
 
-
-s = TableObject(filename="/home/kbaeg/Documents/outputs/exomeDepth/exomeDepth_13_pe_ucscGenome_output.csv", delim = "\t")
+# read in files
+s = TableObject(filename="/exomeDepth_13_pe_ucscGenome_output.csv", delim = "\t")
 # print(s.get_data())
 s.add_id('id')
 print(s.print_data())
 
-
+# check frequencies
 p = s.get_freq(["hg19.kgXref.geneSymbol", "hg19.knownGene.chrom"], print_freq = False)
 for i, v in p.items():
 	print(i[1])
 	print('index: ', i, 'value: ', v)
 
-sys.exit()
+
 
 
 
 #create exomeCopyDepth object
 exomeDepth = GenericObject()
-print('jsfdo')
 exomeDepth_genomic_obj = CNVObject(filename = exomedepth_result_file, delim=",", 
 	colnames = {'id': '"id"', 'chr':'"chromosome"', 'start':'"start"', 'end':'"end"', 'type':'"type"'})
 exomeDepth.set_data('raw_results', exomeDepth_genomic_obj)
@@ -58,7 +57,7 @@ for i, v in p.items():
 
 sys.exit()
 
-
+# find CNV overlaps
 tofind_overlaps = [xhmm.denovo, xhmm.filtered_results]
 overlap1 = find_interval_overlaps(exomeDepth.raw_results, tofind_overlaps, threshold=0, add_stats=True)
 
